@@ -9,7 +9,7 @@
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
 
-    <Label fx:id="welcomeText" maxWidth="500.0" textAlignment="CENTER" wrapText="true" />
+    <Label fx:id="welcomeText" alignment="CENTER" maxWidth="500.0" textAlignment="CENTER" wrapText="true" />
 
     <Button fx:id="btnCambiarModo" onAction="#onCambiarModo" text="Cambiar a modo 1-9" />
 
