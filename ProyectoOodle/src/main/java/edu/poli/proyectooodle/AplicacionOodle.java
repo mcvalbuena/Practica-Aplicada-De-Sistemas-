@@ -1,17 +1,19 @@
-package com.example.proyectooodle;
+package edu.poli.proyectooodle;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
-public class HelloApplication extends Application {
+
+public class AplicacionOodle extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 800, 600);
+        FXMLLoader loader = new FXMLLoader(
+                AplicacionOodle.class.getResource("/edu.poli.proyectooodle/vista/hello-view.fxml"));
+
+        Scene scene = new Scene(loader.load(), 800, 600);
         stage.setTitle("Oodle Game");
         stage.setScene(scene);
         stage.show();

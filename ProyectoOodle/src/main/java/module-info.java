@@ -1,8 +1,6 @@
-module com.example.proyectooodle {
+module edu.poli.proyectooodle {
     requires javafx.controls;
     requires javafx.fxml;
-
-
-    opens com.example.proyectooodle to javafx.fxml;
-    exports com.example.proyectooodle;
+    opens edu.poli.proyectooodle.controlador to javafx.fxml;
+    exports edu.poli.proyectooodle;
 }
