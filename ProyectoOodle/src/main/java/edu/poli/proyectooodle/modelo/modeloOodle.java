@@ -3,7 +3,7 @@ package edu.poli.proyectooodle.modelo;
 
 public class modeloOodle {
 
-    private boolean modoActual = true; // false = 1-12, true = 1-9
+    private boolean modoActual = true;
 
     public boolean getModoActual() {
         return modoActual;

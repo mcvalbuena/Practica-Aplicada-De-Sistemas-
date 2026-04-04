@@ -116,5 +116,11 @@
             </VBox>
         </HBox>
 
+        <!-- Botón Nueva Partida -->
+        <HBox alignment="CENTER">
+            <Button fx:id="btnNuevaPartida" text="Nueva Partida"
+                    style="-fx-background-color: #5b4fcf; -fx-text-fill: #ffffff; -fx-font-size: 13px; -fx-font-weight: bold; -fx-background-radius: 20; -fx-padding: 7 18 7 18; -fx-cursor: hand;"/>
+        </HBox>
+
     </VBox>
 </VBox>
