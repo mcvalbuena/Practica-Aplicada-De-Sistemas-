@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="0"
+      prefWidth="1100.0" prefHeight="650.0"
+      style="-fx-background-color: #f8f8f8;"
+      xmlns="http://javafx.com/javafx/17.0.12"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="edu.poli.proyectooodle.controlador.ControladorNuevaPartida">
+
+    <!-- ═══════════════════════════════════════
+         NAVBAR
+    ═══════════════════════════════════════ -->
+    <HBox alignment="CENTER_LEFT" prefHeight="70" spacing="12"
+          style="-fx-background-color: #ffffff; -fx-border-color: #e8e8e8; -fx-border-width: 0 0 1 0;">
+        <padding>
+            <Insets left="24" right="24" top="12" bottom="12"/>
+        </padding>
+
+        <!-- Icono home -->
+        <Button text="⌂" onAction="#onHome"
+                style="-fx-background-color: #eeeef8; -fx-background-radius: 50; -fx-border-color: transparent; -fx-font-size: 18px; -fx-text-fill: #5b4fcf; -fx-pref-width: 44; -fx-pref-height: 44; -fx-cursor: hand;"/>
+
+        <!-- Título centrado -->
+        <HBox HBox.hgrow="ALWAYS" alignment="CENTER">
+            <Label text="Ooodle"
+                   style="-fx-font-size: 30px; -fx-font-weight: bold; -fx-text-fill: #030213;"/>
+        </HBox>
+
+        <!-- Botón Restart -->
+        <Button text="Restart" onAction="#onRestart"
+                style="-fx-background-color: #f0f0f0; -fx-border-color: #d0d0d0; -fx-border-width: 1; -fx-border-radius: 8; -fx-background-radius: 8; -fx-text-fill: #030213; -fx-font-size: 14px; -fx-padding: 8 20 8 20; -fx-cursor: hand;"/>
+    </HBox>
+
+    <!-- ═══════════════════════════════════════
+         CONTENIDO PRINCIPAL
+    ═══════════════════════════════════════ -->
+    <HBox alignment="CENTER" spacing="40" VBox.vgrow="ALWAYS">
+        <padding>
+            <Insets top="30" bottom="20" left="40" right="40"/>
+        </padding>
+
+        <!-- ───────────────────────────────────
+             GRILLA DE JUEGO (6 filas)
+        ─────────────────────────────────────── -->
+        <VBox spacing="10" alignment="CENTER">
+
+            <!-- Fila 1 -->
+            <HBox spacing="8" alignment="CENTER">
+                <Button fx:id="f1c1" text="" onAction="#onCeldaClick"
+                        style="-fx-background-color: #ffffff; -fx-border-color: #d0d0d0; -fx-border-width: 1.5; -fx-border-radius: 8; -fx-background-radius: 8; -fx-pref-width: 60; -fx-pref-height: 60; -fx-font-size: 18px; -fx-font-weight: bold; -fx-cursor: hand;"/>
+                <Label text="+" style="-fx-font-size: 18px; -fx-text-fill: #888; -fx-pref-width: 16; -fx-alignment: center;"/>
+                <Button fx:id="f1c2" text="" onAction="#onCeldaClick"
+                        style="-fx-background-color: #ffffff; -fx-border-color: #d0d0d0; -fx-border-width: 1.5; -fx-border-radius: 8; -fx-background-radius: 8; -fx-pref-width: 60; -fx-pref-height: 60; -fx-font-size: 18px; -fx-font-weight: bold; -fx-cursor: hand;"/>
+                <Label text="×" style="-fx-font-size: 18px; -fx-text-fill: #888; -fx-pref-width: 16; -fx-alignment: center;"/>
+                <Button fx:id="f1c3" text="" onAction="#onCeldaClick"
+                        style="-fx-background-color: #ffffff; -fx-border-color: #d0d0d0; -fx-border-width: 1.5; -fx-border-radius: 8; -fx-background-radius: 8; -fx-pref-width: 60; -fx-pref-height: 60; -fx-font-size: 18px; -fx-font-weight: bold; -fx-cursor: hand;"/>
+                <Label text="−" style="-fx-font-size: 18px; -fx-text-fill: #888; -fx-pref-width: 16; -fx-alignment: center;"/>
+                <Button fx:id="f1c4" text="" onAction="#onCeldaClick"
+                        style="-fx-background-color: #ffffff; -fx-border-color: #d0d0d0; -fx-border-width: 1.5; -fx-border-radius: 8; -fx-background-radius: 8; -fx-pref-width: 60; -fx-pref-height: 60; -fx-font-size: 18px; -fx-font-weight: bold; -fx-cursor: hand;"/>
+                <Label text="=" style="-fx-font-size: 18px; -fx-text-fill: #888; -fx-pref-width: 16; -fx-alignment: center;"/>
+                <Button fx:id="f1resultado" text="40"
+                        style="-fx-background-color: #f472b6; -fx-border-color: #f472b6; -fx-border-width: 1.5; -fx-border-radius: 8; -fx-background-radius: 8; -fx-pref-width: 60; -fx-pref-height: 60; -fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #ffffff; -fx-cursor: hand;" onAction="#onVerificarFila"/>
+            </HBox>
+
+            <!-- Fila 2 -->
+            <HBox spacing="8" alignment="CENTER">
+                <Button fx:id="f2c1" text="" onAction="#onCeldaClick"
+                        style="-fx-background-color: #ffffff; -fx-border-color: #d0d0d0; -fx-border-width: 1.5; -fx-border-radius: 8; -fx-background-radius: 8; -fx-pref-width: 60; -fx-pref-height: 60; -fx-font-size: 18px; -fx-font-weight: bold; -fx-cursor: hand;"/>
+                <Label text="+" style="-fx-font-size: 18px; -fx-text-fill: #888; -fx-pref-width: 16; -fx-alignment: center;"/>
+                <Button fx:id="f2c2" text="" onAction="#onCeldaClick"
+                        style="-fx-background-color: #ffffff; -fx-border-color: #d0d0d0; -fx-border-width: 1.5; -fx-border-radius: 8; -fx-background-radius: 8; -fx-pref-width: 60; -fx-pref-height: 60; -fx-font-size: 18px; -fx-font-weight: bold; -fx-cursor: hand;"/>
+                <Label text="×" style="-fx-font-size: 18px; -fx-text-fill: #888; -fx-pref-width: 16; -fx-alignment: center;"/>
+                <Button fx:id="f2c3" text="" onAction="#onCeldaClick"
+                        style="-fx-background-color: #ffffff; -fx-border-color: #d0d0d0; -fx-border-width: 1.5; -fx-border-radius: 8; -fx-background-radius: 8; -fx-pref-width: 60; -fx-pref-height: 60; -fx-font-size: 18px; -fx-font-weight: bold; -fx-cursor: hand;"/>
+                <Label text="−" style="-fx-font-size: 18px; -fx-text-fill: #888; -fx-pref-width: 16; -fx-alignment: center;"/>
+                <Button fx:id="f2c4" text="" onAction="#onCeldaClick"
+                        style="-fx-background-color: #ffffff; -fx-border-color: #d0d0d0; -fx-border-width: 1.5; -fx-border-radius: 8; -fx-background-radius: 8; -fx-pref-width: 60; -fx-pref-height: 60; -fx-font-size: 18px; -fx-font-weight: bold; -fx-cursor: hand;"/>
+                <Label text="=" style="-fx-font-size: 18px; -fx-text-fill: #888; -fx-pref-width: 16; -fx-alignment: center;"/>
+                <Button fx:id="f2resultado" text=""
+                        style="-fx-background-color: #ffffff; -fx-border-color: #d0d0d0; -fx-border-width: 1.5; -fx-border-radius: 8; -fx-background-radius: 8; -fx-pref-width: 60; -fx-pref-height: 60; -fx-font-size: 18px; -fx-font-weight: bold; -fx-cursor: hand;" onAction="#onVerificarFila"/>
+            </HBox>
+
+            <!-- Fila 3 -->
+            <HBox spacing="8" alignment="CENTER">
+                <Button fx:id="f3c1" text="" onAction="#onCeldaClick"
+                        style="-fx-background-color: #ffffff; -fx-border-color: #d0d0d0; -fx-border-width: 1.5; -fx-border-radius: 8; -fx-background-radius: 8; -fx-pref-width: 60; -fx-pref-height: 60; -fx-font-size: 18px; -fx-font-weight: bold; -fx-cursor: hand;"/>
+                <Label text="+" style="-fx-font-size: 18px; -fx-text-fill: #888; -fx-pref-width: 16; -fx-alignment: center;"/>
+                <Button fx:id="f3c2" text="" onAction="#onCeldaClick"
+                        style="-fx-background-color: #ffffff; -fx-border-color: #d0d0d0; -fx-border-width: 1.5; -fx-border-radius: 8; -fx-background-radius: 8; -fx-pref-width: 60; -fx-pref-height: 60; -fx-font-size: 18px; -fx-font-weight: bold; -fx-cursor: hand;"/>
+                <Label text="×" style="-fx-font-size: 18px; -fx-text-fill: #888; -fx-pref-width: 16; -fx-alignment: center;"/>
+                <Button fx:id="f3c3" text="" onAction="#onCeldaClick"
+                        style="-fx-background-color: #ffffff; -fx-border-color: #d0d0d0; -fx-border-width: 1.5; -fx-border-radius: 8; -fx-background-radius: 8; -fx-pref-width: 60; -fx-pref-height: 60; -fx-font-size: 18px; -fx-font-weight: bold; -fx-cursor: hand;"/>
+                <Label text="−" style="-fx-font-size: 18px; -fx-text-fill: #888; -fx-pref-width: 16; -fx-alignment: center;"/>
+                <Button fx:id="f3c4" text="" onAction="#onCeldaClick"
+                        style="-fx-background-color: #ffffff; -fx-border-color: #d0d0d0; -fx-border-width: 1.5; -fx-border-radius: 8; -fx-background-radius: 8; -fx-pref-width: 60; -fx-pref-height: 60; -fx-font-size: 18px; -fx-font-weight: bold; -fx-cursor: hand;"/>
+                <Label text="=" style="-fx-font-size: 18px; -fx-text-fill: #888; -fx-pref-width: 16; -fx-alignment: center;"/>
+                <Button fx:id="f3resultado" text=""
+                        style="-fx-background-color: #ffffff; -fx-border-color: #d0d0d0; -fx-border-width: 1.5; -fx-border-radius: 8; -fx-background-radius: 8; -fx-pref-width: 60; -fx-pref-height: 60; -fx-font-size: 18px; -fx-font-weight: bold; -fx-cursor: hand;" onAction="#onVerificarFila"/>
+            </HBox>
+
+            <!-- Fila 4 -->
+            <HBox spacing="8" alignment="CENTER">
+                <Button fx:id="f4c1" text="" onAction="#onCeldaClick"
+                        style="-fx-background-color: #ffffff; -fx-border-color: #d0d0d0; -fx-border-width: 1.5; -fx-border-radius: 8; -fx-background-radius: 8; -fx-pref-width: 60; -fx-pref-height: 60; -fx-font-size: 18px; -fx-font-weight: bold; -fx-cursor: hand;"/>
+                <Label text="+" style="-fx-font-size: 18px; -fx-text-fill: #888; -fx-pref-width: 16; -fx-alignment: center;"/>
+                <Button fx:id="f4c2" text="" onAction="#onCeldaClick"
+                        style="-fx-background-color: #ffffff; -fx-border-color: #d0d0d0; -fx-border-width: 1.5; -fx-border-radius: 8; -fx-background-radius: 8; -fx-pref-width: 60; -fx-pref-height: 60; -fx-font-size: 18px; -fx-font-weight: bold; -fx-cursor: hand;"/>
+                <Label text="×" style="-fx-font-size: 18px; -fx-text-fill: #888; -fx-pref-width: 16; -fx-alignment: center;"/>
+                <Button fx:id="f4c3" text="" onAction="#onCeldaClick"
+                        style="-fx-background-color: #ffffff; -fx-border-color: #d0d0d0; -fx-border-width: 1.5; -fx-border-radius: 8; -fx-background-radius: 8; -fx-pref-width: 60; -fx-pref-height: 60; -fx-font-size: 18px; -fx-font-weight: bold; -fx-cursor: hand;"/>
+                <Label text="−" style="-fx-font-size: 18px; -fx-text-fill: #888; -fx-pref-width: 16; -fx-alignment: center;"/>
+                <Button fx:id="f4c4" text="" onAction="#onCeldaClick"
+                        style="-fx-background-color: #ffffff; -fx-border-color: #d0d0d0; -fx-border-width: 1.5; -fx-border-radius: 8; -fx-background-radius: 8; -fx-pref-width: 60; -fx-pref-height: 60; -fx-font-size: 18px; -fx-font-weight: bold; -fx-cursor: hand;"/>
+                <Label text="=" style="-fx-font-size: 18px; -fx-text-fill: #888; -fx-pref-width: 16; -fx-alignment: center;"/>
+                <Button fx:id="f4resultado" text=""
+                        style="-fx-background-color: #ffffff; -fx-border-color: #d0d0d0; -fx-border-width: 1.5; -fx-border-radius: 8; -fx-background-radius: 8; -fx-pref-width: 60; -fx-pref-height: 60; -fx-font-size: 18px; -fx-font-weight: bold; -fx-cursor: hand;" onAction="#onVerificarFila"/>
+            </HBox>
+
+            <!-- Fila 5 -->
+            <HBox spacing="8" alignment="CENTER">
+                <Button fx:id="f5c1" text="" onAction="#onCeldaClick"
+                        style="-fx-background-color: #ffffff; -fx-border-color: #d0d0d0; -fx-border-width: 1.5; -fx-border-radius: 8; -fx-background-radius: 8; -fx-pref-width: 60; -fx-pref-height: 60; -fx-font-size: 18px; -fx-font-weight: bold; -fx-cursor: hand;"/>
+                <Label text="+" style="-fx-font-size: 18px; -fx-text-fill: #888; -fx-pref-width: 16; -fx-alignment: center;"/>
+                <Button fx:id="f5c2" text="" onAction="#onCeldaClick"
+                        style="-fx-background-color: #ffffff; -fx-border-color: #d0d0d0; -fx-border-width: 1.5; -fx-border-radius: 8; -fx-background-radius: 8; -fx-pref-width: 60; -fx-pref-height: 60; -fx-font-size: 18px; -fx-font-weight: bold; -fx-cursor: hand;"/>
+                <Label text="×" style="-fx-font-size: 18px; -fx-text-fill: #888; -fx-pref-width: 16; -fx-alignment: center;"/>
+                <Button fx:id="f5c3" text="" onAction="#onCeldaClick"
+                        style="-fx-background-color: #ffffff; -fx-border-color: #d0d0d0; -fx-border-width: 1.5; -fx-border-radius: 8; -fx-background-radius: 8; -fx-pref-width: 60; -fx-pref-height: 60; -fx-font-size: 18px; -fx-font-weight: bold; -fx-cursor: hand;"/>
+                <Label text="−" style="-fx-font-size: 18px; -fx-text-fill: #888; -fx-pref-width: 16; -fx-alignment: center;"/>
+                <Button fx:id="f5c4" text="" onAction="#onCeldaClick"
+                        style="-fx-background-color: #ffffff; -fx-border-color: #d0d0d0; -fx-border-width: 1.5; -fx-border-radius: 8; -fx-background-radius: 8; -fx-pref-width: 60; -fx-pref-height: 60; -fx-font-size: 18px; -fx-font-weight: bold; -fx-cursor: hand;"/>
+                <Label text="=" style="-fx-font-size: 18px; -fx-text-fill: #888; -fx-pref-width: 16; -fx-alignment: center;"/>
+                <Button fx:id="f5resultado" text=""
+                        style="-fx-background-color: #ffffff; -fx-border-color: #d0d0d0; -fx-border-width: 1.5; -fx-border-radius: 8; -fx-background-radius: 8; -fx-pref-width: 60; -fx-pref-height: 60; -fx-font-size: 18px; -fx-font-weight: bold; -fx-cursor: hand;" onAction="#onVerificarFila"/>
+            </HBox>
+
+            <!-- Fila 6 -->
+            <HBox spacing="8" alignment="CENTER">
+                <Button fx:id="f6c1" text="" onAction="#onCeldaClick"
+                        style="-fx-background-color: #ffffff; -fx-border-color: #d0d0d0; -fx-border-width: 1.5; -fx-border-radius: 8; -fx-background-radius: 8; -fx-pref-width: 60; -fx-pref-height: 60; -fx-font-size: 18px; -fx-font-weight: bold; -fx-cursor: hand;"/>
+                <Label text="+" style="-fx-font-size: 18px; -fx-text-fill: #888; -fx-pref-width: 16; -fx-alignment: center;"/>
+                <Button fx:id="f6c2" text="" onAction="#onCeldaClick"
+                        style="-fx-background-color: #ffffff; -fx-border-color: #d0d0d0; -fx-border-width: 1.5; -fx-border-radius: 8; -fx-background-radius: 8; -fx-pref-width: 60; -fx-pref-height: 60; -fx-font-size: 18px; -fx-font-weight: bold; -fx-cursor: hand;"/>
+                <Label text="×" style="-fx-font-size: 18px; -fx-text-fill: #888; -fx-pref-width: 16; -fx-alignment: center;"/>
+                <Button fx:id="f6c3" text="" onAction="#onCeldaClick"
+                        style="-fx-background-color: #ffffff; -fx-border-color: #d0d0d0; -fx-border-width: 1.5; -fx-border-radius: 8; -fx-background-radius: 8; -fx-pref-width: 60; -fx-pref-height: 60; -fx-font-size: 18px; -fx-font-weight: bold; -fx-cursor: hand;"/>
+                <Label text="−" style="-fx-font-size: 18px; -fx-text-fill: #888; -fx-pref-width: 16; -fx-alignment: center;"/>
+                <Button fx:id="f6c4" text="" onAction="#onCeldaClick"
+                        style="-fx-background-color: #ffffff; -fx-border-color: #d0d0d0; -fx-border-width: 1.5; -fx-border-radius: 8; -fx-background-radius: 8; -fx-pref-width: 60; -fx-pref-height: 60; -fx-font-size: 18px; -fx-font-weight: bold; -fx-cursor: hand;"/>
+                <Label text="=" style="-fx-font-size: 18px; -fx-text-fill: #888; -fx-pref-width: 16; -fx-alignment: center;"/>
+                <Button fx:id="f6resultado" text=""
+                        style="-fx-background-color: #ffffff; -fx-border-color: #d0d0d0; -fx-border-width: 1.5; -fx-border-radius: 8; -fx-background-radius: 8; -fx-pref-width: 60; -fx-pref-height: 60; -fx-font-size: 18px; -fx-font-weight: bold; -fx-cursor: hand;" onAction="#onVerificarFila"/>
+            </HBox>
+
+        </VBox>
+
+        <!-- ───────────────────────────────────
+             PANEL TECLADO NUMÉRICO
+        ─────────────────────────────────────── -->
+        <VBox spacing="12" alignment="CENTER"
+              style="-fx-background-color: #ebebf0; -fx-background-radius: 16; -fx-padding: 20;">
+
+            <!-- Check y Del -->
+            <HBox spacing="10" alignment="CENTER">
+                <Button text="Check" onAction="#onCheck"
+                        style="-fx-background-color: #f472b6; -fx-text-fill: #ffffff; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 10; -fx-padding: 10 20 10 20; -fx-cursor: hand;"/>
+                <Button text="Del" onAction="#onDel"
+                        style="-fx-background-color: #030213; -fx-text-fill: #ffffff; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 10; -fx-padding: 10 20 10 20; -fx-cursor: hand;"/>
+            </HBox>
+
+            <!-- Fila 7 8 9 -->
+            <HBox spacing="10" alignment="CENTER">
+                <Button text="7" onAction="#onNumero"
+                        style="-fx-background-color: #ffffff; -fx-border-color: #5b4fcf; -fx-border-width: 2; -fx-background-radius: 50; -fx-border-radius: 50; -fx-pref-width: 60; -fx-pref-height: 60; -fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #5b4fcf; -fx-cursor: hand;"/>
+                <Button text="8" onAction="#onNumero"
+                        style="-fx-background-color: #ffffff; -fx-border-color: #5b4fcf; -fx-border-width: 2; -fx-background-radius: 50; -fx-border-radius: 50; -fx-pref-width: 60; -fx-pref-height: 60; -fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #5b4fcf; -fx-cursor: hand;"/>
+                <Button text="9" onAction="#onNumero"
+                        style="-fx-background-color: #ffffff; -fx-border-color: #5b4fcf; -fx-border-width: 2; -fx-background-radius: 50; -fx-border-radius: 50; -fx-pref-width: 60; -fx-pref-height: 60; -fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #5b4fcf; -fx-cursor: hand;"/>
+            </HBox>
+
+            <!-- Fila 4 5 6 -->
+            <HBox spacing="10" alignment="CENTER">
+                <Button text="4" onAction="#onNumero"
+                        style="-fx-background-color: #ffffff; -fx-border-color: #5b4fcf; -fx-border-width: 2; -fx-background-radius: 50; -fx-border-radius: 50; -fx-pref-width: 60; -fx-pref-height: 60; -fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #5b4fcf; -fx-cursor: hand;"/>
+                <Button text="5" onAction="#onNumero"
+                        style="-fx-background-color: #ffffff; -fx-border-color: #5b4fcf; -fx-border-width: 2; -fx-background-radius: 50; -fx-border-radius: 50; -fx-pref-width: 60; -fx-pref-height: 60; -fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #5b4fcf; -fx-cursor: hand;"/>
+                <Button text="6" onAction="#onNumero"
+                        style="-fx-background-color: #ffffff; -fx-border-color: #5b4fcf; -fx-border-width: 2; -fx-background-radius: 50; -fx-border-radius: 50; -fx-pref-width: 60; -fx-pref-height: 60; -fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #5b4fcf; -fx-cursor: hand;"/>
+            </HBox>
+
+            <!-- Fila 1 2 3 -->
+            <HBox spacing="10" alignment="CENTER">
+                <Button text="1" onAction="#onNumero"
+                        style="-fx-background-color: #ffffff; -fx-border-color: #5b4fcf; -fx-border-width: 2; -fx-background-radius: 50; -fx-border-radius: 50; -fx-pref-width: 60; -fx-pref-height: 60; -fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #5b4fcf; -fx-cursor: hand;"/>
+                <Button text="2" onAction="#onNumero"
+                        style="-fx-background-color: #ffffff; -fx-border-color: #5b4fcf; -fx-border-width: 2; -fx-background-radius: 50; -fx-border-radius: 50; -fx-pref-width: 60; -fx-pref-height: 60; -fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #5b4fcf; -fx-cursor: hand;"/>
+                <Button text="3" onAction="#onNumero"
+                        style="-fx-background-color: #ffffff; -fx-border-color: #5b4fcf; -fx-border-width: 2; -fx-background-radius: 50; -fx-border-radius: 50; -fx-pref-width: 60; -fx-pref-height: 60; -fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #5b4fcf; -fx-cursor: hand;"/>
+            </HBox>
+
+        </VBox>
+
+    </HBox>
+
+    <!-- ═══════════════════════════════════════
+         FOOTER
+    ═══════════════════════════════════════ -->
+    <HBox alignment="CENTER" prefHeight="30">
+        <Label text="©2026 Mark Weidell"
+               style="-fx-font-size: 12px; -fx-text-fill: #aaaaaa;"/>
+    </HBox>
+
+</VBox>

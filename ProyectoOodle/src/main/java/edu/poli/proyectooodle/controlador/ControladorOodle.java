@@ -1,9 +1,11 @@
 package edu.poli.proyectooodle.controlador;
 
+import edu.poli.proyectooodle.GestorEscenas;
 import edu.poli.proyectooodle.modelo.modeloOodle;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import java.io.IOException;
 
 public class ControladorOodle {
 
@@ -11,6 +13,7 @@ public class ControladorOodle {
     @FXML private Button celda2_1, celda2_2, celda2_3, celda2_4, resultado2;
     @FXML private Button celda3_1, celda3_2, celda3_3, celda3_4, resultado3;
     @FXML private Button btnRango9, btnRango12, btnReanudar, btnMinutero;
+    @FXML private Button btnNuevaPartida;
     @FXML private Label lblRangoRegla;
 
     private final modeloOodle model = new modeloOodle();
@@ -19,6 +22,11 @@ public class ControladorOodle {
     @FXML
     public void initialize() {
         actualizarVista();
+    }
+
+    @FXML
+    protected void onNuevaPartida() throws IOException {
+        GestorEscenas.irA("NuevaPartida.fxml");
     }
 
     @FXML
@@ -55,4 +63,5 @@ public class ControladorOodle {
                 ? "Utilice los números del 1 al 9 solo una vez."
                 : "Utilice los números del 1 al 12 solo una vez.");
     }
+
 }
