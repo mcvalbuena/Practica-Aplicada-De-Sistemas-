@@ -8,9 +8,8 @@ public class TestRegistro {
     static Autenticacion _registro = new Autenticacion();
     static  UserDAO _UserDAO = new UserDAO();
     public static void main(String[] args) {
-
-        //metodoLogin("dani","oscarga");
-       metodoregistrar("dani","oscargay");
+        metodoLogin("dani","oscargay");
+       // metodoregistrar("dani","oscargay");
 
     }
 
