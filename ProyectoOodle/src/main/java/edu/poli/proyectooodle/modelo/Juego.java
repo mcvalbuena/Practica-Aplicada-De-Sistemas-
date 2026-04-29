@@ -47,6 +47,15 @@ public class Juego {
         if (intentosMaximos.isEmpty()) return false;
         Intento ultimo = ultimoIntento();
         List<Integer> vals = ultimo.getValores();
+
+        //debug
+        for (Integer integer : vals)
+        {
+            System.out.println("valor indice:"+vals.indexOf(integer)+" es = "+integer);
+        }
+        //fin debug
+
+        System.out.println();
         int calculado = numeroObjetivo.calcular(
                 vals.get(0), vals.get(1), vals.get(2), vals.get(3));
         return calculado == numeroObjetivo.getResultado();

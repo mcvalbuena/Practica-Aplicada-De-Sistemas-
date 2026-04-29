@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ControladorNuevaPartida {
+public class ControladorPartida {
 
     // ── Celdas por fila ──────────────────────────────────────────────────────────
     @FXML private Button f1c1, f1c2, f1c3, f1c4, f1resultado;

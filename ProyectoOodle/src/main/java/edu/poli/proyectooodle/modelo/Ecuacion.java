@@ -3,6 +3,7 @@ package edu.poli.proyectooodle.modelo;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 
 public class Ecuacion {
@@ -19,26 +20,45 @@ public class Ecuacion {
 
 
     private void generarAleatorio() {
-        Random rand = new Random();
+        int RangoMinimo = 1;
 
-        do {
-            numeros.clear();
-            for (int i = 0; i < 4; i++) {
-                numeros.add(rand.nextInt(rango) + 1);
+
+        Random random = new Random();
+        int numero = ThreadLocalRandom.current().nextInt(1, rango+1);
+        numeros.clear();
+        for (int i = 0; i < 4 ; i++) {
+            if (numeros.isEmpty()) {
+                    numeros.add(ThreadLocalRandom.current().nextInt(1, rango + 1));
             }
-            resultado = calcular(numeros.get(0), numeros.get(1),
-                    numeros.get(2), numeros.get(3));
-        } while (resultado <= 0);
+            else {
+                int num = 0;
+                while (num == 0){
+                    int x = ThreadLocalRandom.current().nextInt(1, rango+1);
+                    if (numeros.contains(x)){
+                    }
+                    else {
+                     num = x;
+                    }
+                }
+
+                numeros.add(num);
+            }
+        }
+
+        //debug
+        for (Integer integer : numeros)
+        {
+            System.out.println("ECUACION CALCULO: valor indice:"+numeros.indexOf(integer)+" es = "+integer);
+        }
+        //fin debug
+
+        resultado = calcular(numeros.get(0), numeros.get(1), numeros.get(2), numeros.get(3));
+
     }
 
 
     public int calcular(int a, int b, int c, int d) {
         return a + (b * c) - d;
-    }
-
-
-    public boolean validarEcuacion(int objetivo) {
-        return this.resultado == objetivo;
     }
 
 
