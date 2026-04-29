@@ -56,17 +56,14 @@ public class Juego {
         //fin debug
 
         System.out.println();
-        int calculado = numeroObjetivo.calcular(
-                vals.get(0), vals.get(1), vals.get(2), vals.get(3));
-        return calculado == numeroObjetivo.getResultado();
-    }
 
-
-    public boolean verificarPosiciones() {
-        if (intentosMaximos.isEmpty()) return false;
-        Intento ultimo = ultimoIntento();
-        ultimo.compararConSolucion(numeroObjetivo);
-        return ultimo.correcto();
+        if (numeroObjetivo.verificarReglas(vals))
+        {
+            return true;
+        }else
+        {
+            return false;
+        }
     }
 
 
@@ -92,10 +89,7 @@ public class Juego {
             return null;
         }
 
-
-        intento.compararConSolucion(numeroObjetivo);
-
-        if (intento.correcto()) {
+        if (intento.correcto(numeroObjetivo)) {
             partidaGanada = true;
             juegoTerminado();
         } else if (intentosMaximos.size() >= MAX_INTENTOS) {

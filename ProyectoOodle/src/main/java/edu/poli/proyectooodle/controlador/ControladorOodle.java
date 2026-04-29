@@ -1,7 +1,6 @@
 package edu.poli.proyectooodle.controlador;
 
 import edu.poli.proyectooodle.GestorEscenas;
-import edu.poli.proyectooodle.modelo.EstadoCasilla;
 import edu.poli.proyectooodle.modelo.Intento;
 import edu.poli.proyectooodle.modelo.Juego;
 import javafx.fxml.FXML;
@@ -109,11 +108,8 @@ public class ControladorOodle {
             return;
         }
 
-        // Colorear celdas según el resultado Wordle
-        List<EstadoCasilla> estados = intento.getEstados();
-        for (int i = 0; i < celdas.length; i++) {
-            colorearCelda(celdas[i], estados.get(i));
-        }
+
+
 
         if (model.isPartidaGanada()) {
             btnResultado.setStyle(estiloVerde());
@@ -150,21 +146,6 @@ public class ControladorOodle {
         lblRangoRegla.setText(model.getModoActual()
                 ? "Utilice los números del 1 al 9 solo una vez."
                 : "Utilice los números del 1 al 12 solo una vez.");
-    }
-
-    private void colorearCelda(Button celda, EstadoCasilla estado) {
-        String color = switch (estado) {
-            case VERDE    -> "#6aaa64";
-            case AMARILLO -> "#c9b458";
-            case GRIS     -> "#787c7e";
-        };
-        celda.setStyle(
-                "-fx-background-color: " + color + "; -fx-text-fill: #ffffff; " +
-                        "-fx-border-color: " + color + "; -fx-border-width: 1.5; " +
-                        "-fx-border-radius: 8; -fx-background-radius: 8; " +
-                        "-fx-pref-width: 60; -fx-pref-height: 60; " +
-                        "-fx-font-size: 18px; -fx-font-weight: bold; -fx-cursor: hand;"
-        );
     }
 
     // ── Estilos reutilizables ─────────────────────────────────────────────────────

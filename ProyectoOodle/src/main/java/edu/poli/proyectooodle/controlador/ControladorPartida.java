@@ -1,7 +1,6 @@
 package edu.poli.proyectooodle.controlador;
 
 import edu.poli.proyectooodle.GestorEscenas;
-import edu.poli.proyectooodle.modelo.EstadoCasilla;
 import edu.poli.proyectooodle.modelo.Intento;
 import edu.poli.proyectooodle.modelo.Juego;
 import javafx.event.ActionEvent;
@@ -62,7 +61,7 @@ public class ControladorPartida {
     /** Escribe "= X" en cada botón de resultado para que el jugador vea el objetivo. */
     private void mostrarObjetivo() {
         if (juego.getNumeroObjetivo() == null) return;
-        String textoObjetivo = "= " + juego.getNumeroObjetivo().getResultado();
+        String textoObjetivo = "" + juego.getNumeroObjetivo().getResultado();
         for (Button r : resultados) {
             r.setText(textoObjetivo);
         }
@@ -164,11 +163,17 @@ public class ControladorPartida {
             return;
         }
 
-        // 3. Colorear celdas según el resultado Wordle
-        List<EstadoCasilla> estados = intento.getEstados();
-        for (int i = 0; i < celdas[fila].length; i++) {
-            colorearCelda(celdas[fila][i], estados.get(i));
+        // 3. Colorear celdas según el resultado Oodle
+        if (intento.correcto(juego.getNumeroObjetivo())) {
+            for (int i = 0; i < celdas[fila].length; i++) {
+                colorearCelda(celdas[fila][i], true);
+            }
+        } else {
+            for (int i = 0; i < celdas[fila].length; i++) {
+                colorearCelda(celdas[fila][i], false);
+            }
         }
+
 
         // 4. Actualizar botón resultado de la fila
         resultados[fila].setStyle(estiloResultadoUsado());
@@ -188,12 +193,16 @@ public class ControladorPartida {
 
     // ── Coloreado de celdas ───────────────────────────────────────────────────────
 
-    private void colorearCelda(Button celda, EstadoCasilla estado) {
-        String color = switch (estado) {
-            case VERDE    -> "#6aaa64";
-            case AMARILLO -> "#c9b458";
-            case GRIS     -> "#787c7e";
-        };
+    private void colorearCelda(Button celda, boolean correcto) {
+        String color;
+        if (correcto){
+            color = "#6aaa64"; // verde
+        }
+        else
+        {
+            color = "#FF0000"; // rojo
+        }
+
         celda.setStyle(
                 "-fx-background-color: " + color + "; -fx-text-fill: #ffffff; " +
                         "-fx-border-color: " + color + "; -fx-border-width: 1.5; " +

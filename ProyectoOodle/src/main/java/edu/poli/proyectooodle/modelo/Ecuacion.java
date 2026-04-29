@@ -1,8 +1,6 @@
 package edu.poli.proyectooodle.modelo;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 
@@ -59,6 +57,20 @@ public class Ecuacion {
 
     public int calcular(int a, int b, int c, int d) {
         return a + (b * c) - d;
+    }
+
+    public boolean verificarReglas(List<Integer> numbers)
+    {
+        Set<Integer> set = new HashSet<>(numbers);
+
+        if (set.size() != numbers.size()) {
+            //hay numeros repetidos
+            return false;
+        } else {
+
+            //no hay numero repetidos
+            return true;
+        }
     }
 
 
