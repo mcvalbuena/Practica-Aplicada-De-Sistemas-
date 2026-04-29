@@ -1,9 +1,10 @@
 package edu.poli.proyectooodle.Services;
 
+import io.github.cdimascio.dotenv.Dotenv;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-import io.github.cdimascio.dotenv.Dotenv;
 
 public class ConexionBD {
     private static ConexionBD instancia;

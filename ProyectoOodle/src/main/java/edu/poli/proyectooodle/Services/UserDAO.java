@@ -3,82 +3,102 @@ package edu.poli.proyectooodle.Services;
 import edu.poli.proyectooodle.modelo.Usuario;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDAO {
 
-    public String create(Tarjeta t) throws Exception {
+    // ✅ CREATE
+    public String create(Usuario user) {
+        String sql = "INSERT INTO Users (username, password, score) VALUES (?, ?, ?)";
 
-        Connection con = ConexionBD.getInstancia().getConexion();
+        try (Connection con = ConexionBD.getInstancia().getConexion();
+             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-        con.setAutoCommit(false);
+            ps.setString(1, user.getNombre());
+            ps.setString(2, user.getPasswordHash());
+            ps.setInt(3, user.getScore());
 
-        String SQL_INSERT_TARJETA = "INSERT INTO tarjeta (numero, fecha_exp, estado, titular_id) "
-                + "VALUES (?, ?, ?, ?)";
-
-        PreparedStatement ps = con.prepareStatement(SQL_INSERT_TARJETA);
-        ps.setString(1, t.getNumero());
-        ps.setString(2, t.getFechaExp());
-        ps.setBoolean(3, t.isEstado());
-        ps.setString(4, t.getTitular().getId());
-        ps.executeUpdate();
-
-        String SQL_INSERT_DEBITO = "INSERT INTO tarjeta_debito (numero, saldo) VALUES (?, ?)";
-        String SQL_INSERT_CREDITO = "INSERT INTO tarjeta_credito (numero, limite) VALUES (?, ?)";
-
-        String sql = (t instanceof Debito) ? SQL_INSERT_DEBITO : SQL_INSERT_CREDITO;
-        ps = con.prepareStatement(sql);
-        ps.setString(1, t.getNumero());
-        if (t instanceof Debito)
-            ps.setDouble(2, ((Debito) t).getSaldo());
-        else
-            ps.setDouble(2, ((Credito) t).getLimite());
-
-        try {
             ps.executeUpdate();
-            con.commit();
-            return "✔ " + t.getClass().getSimpleName() + " [" + t.getNumero() + "] guardada correctamente.";
+
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                user.setId(rs.getInt(1));
+            }
+
+            return "✔ Usuario creado correctamente";
+
         } catch (Exception e) {
-            con.rollback();
-            return e.getMessage();
-        } finally {
-            con.setAutoCommit(true);
+            return "❌ Error: " + e.getMessage();
         }
     }
 
-    public <K> Tarjeta readone(K num) throws Exception {
+    // ✅ READ ONE
+    public Usuario getByUsername(String username) {
+        String sql = "SELECT * FROM Users WHERE username = ?";
 
-        Connection con = ConexionBD.getInstancia().getConexion();
+        try (Connection con = ConexionBD.getInstancia().getConexion();
+             PreparedStatement ps = con.prepareStatement(sql)) {
 
-        String SQL_SELECT_DEBITO = "SELECT  t.numero, t.fecha_exp, t.estado, "
-                + "        ti.id AS titular_id, ti.nombre AS titular_nombre, " + "        d.saldo "
-                + "FROM    tarjeta_debito d " + "INNER JOIN tarjeta  t  ON d.numero     = t.numero "
-                + "INNER JOIN titular  ti ON t.titular_id = ti.id " + "WHERE   d.numero = ?";
+            ps.setString(1, username);
+            ResultSet rs = ps.executeQuery();
 
-        PreparedStatement ps = con.prepareStatement(SQL_SELECT_DEBITO);
-        ps.setString(1, (String) num);
-        ResultSet rs = ps.executeQuery();
-        if (rs.next()) {
-            return new Debito(rs.getString("numero"), rs.getString("fecha_exp"), rs.getBoolean("estado"),
-                    new Titular(rs.getString("titular_id"), rs.getString("titular_nombre")), rs.getDouble("saldo"));
-        }
+            if (rs.next()) {
+                return new Usuario(
+                        rs.getInt("id"),
+                        rs.getString("username"),
+                        rs.getString("password"),
+                        rs.getInt("score")
+                );
+            }
 
-        String SQL_SELECT_CREDITO = "SELECT  t.numero, t.fecha_exp, t.estado, "
-                + "        ti.id AS titular_id, ti.nombre AS titular_nombre, " + "        c.limite "
-                + "FROM    tarjeta_credito c " + "INNER JOIN tarjeta  t  ON c.numero     = t.numero "
-                + "INNER JOIN titular  ti ON t.titular_id = ti.id " + "WHERE   c.numero = ?";
-
-        ps = con.prepareStatement(SQL_SELECT_CREDITO);
-        ps.setString(1, (String) num);
-        rs = ps.executeQuery();
-        if (rs.next()) {
-            return new Credito(rs.getString("numero"), rs.getString("fecha_exp"), rs.getBoolean("estado"),
-                    new Titular(rs.getString("titular_id"), rs.getString("titular_nombre")), rs.getDouble("limite"));
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         return null;
     }
 
-    public List<Tarjeta> readall() {
-        return null;
+    // ✅ UPDATE SCORE
+    public boolean updateScore(String username, int newScore) {
+        String sql = "UPDATE Users SET score = ? WHERE username = ?";
+
+        try (Connection con = ConexionBD.getInstancia().getConexion();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setInt(1, newScore);
+            ps.setString(2, username);
+
+            return ps.executeUpdate() > 0;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    // ✅ READ ALL
+    public List<Usuario> getAll() {
+        List<Usuario> lista = new ArrayList<>();
+        String sql = "SELECT * FROM Users";
+
+        try (Connection con = ConexionBD.getInstancia().getConexion();
+             Statement stmt = con.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                lista.add(new Usuario(
+                        rs.getInt("id"),
+                        rs.getString("username"),
+                        rs.getString("password"),
+                        rs.getInt("score")
+                ));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return lista;
     }
 }

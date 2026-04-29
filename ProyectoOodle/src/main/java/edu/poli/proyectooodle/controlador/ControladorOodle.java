@@ -42,20 +42,6 @@ public class ControladorOodle {
         GestorEscenas.irA("NuevaPartida.fxml");
     }
 
-    // ── Minutero ──────────────────────────────────────────────────────────────────
-
-    @FXML
-    protected void onToggleMinutero() {
-        minuteroActivo = !minuteroActivo;
-        if (minuteroActivo) {
-            btnMinutero.setStyle("-fx-background-color: #030213; -fx-background-radius: 20; " +
-                    "-fx-pref-width: 44; -fx-pref-height: 24; -fx-cursor: hand;");
-        } else {
-            btnMinutero.setStyle("-fx-background-color: #cbced4; -fx-background-radius: 20; " +
-                    "-fx-pref-width: 44; -fx-pref-height: 24; -fx-cursor: hand;");
-        }
-    }
-
     // ── Verificación de filas (pantalla de inicio) ────────────────────────────────
 
     @FXML
@@ -107,9 +93,6 @@ public class ControladorOodle {
             btnResultado.setText("✗");
             return;
         }
-
-
-
 
         if (model.isPartidaGanada()) {
             btnResultado.setStyle(estiloVerde());
