@@ -9,7 +9,7 @@ public class TestRegistro {
     static  UserDAO _UserDAO = new UserDAO();
     public static void main(String[] args) {
 
-        metodoLogin("dani","oscarga");
+        metodoLogin("dani","oscargay");
        // metodoregistrar("dani","oscargay");
 
     }
