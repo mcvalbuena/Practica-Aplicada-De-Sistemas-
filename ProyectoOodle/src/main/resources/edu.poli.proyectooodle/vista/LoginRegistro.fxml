@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="edu.poli.proyectooodle.controlador.ControladorLoginRegistro"
+           prefWidth="900" prefHeight="700"
+           style="-fx-background-color: #f4f4f8;">
+
+    <!-- ── Tarjeta central ── -->
+    <VBox alignment="CENTER" spacing="0"
+          style="-fx-background-color: #ffffff;
+                 -fx-background-radius: 16;
+                 -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.10), 18, 0, 0, 4);
+                 -fx-pref-width: 380;
+                 -fx-max-width: 380;
+                 -fx-padding: 40 40 40 40;">
+
+        <!-- Logo / título -->
+        <Label text="Oodle"
+               style="-fx-font-size: 36px; -fx-font-weight: bold;
+                      -fx-text-fill: #5b4fcf; -fx-padding: 0 0 6 0;"/>
+        <Label text="El juego de ecuaciones"
+               style="-fx-font-size: 13px; -fx-text-fill: #888;
+                      -fx-padding: 0 0 28 0;"/>
+
+        <!-- ── Toggle Login / Registro ── -->
+        <HBox spacing="0" alignment="CENTER"
+              style="-fx-background-color: #f0effe;
+                     -fx-background-radius: 30;
+                     -fx-padding: 4;
+                     -fx-pref-width: 280;
+                     -fx-max-width: 280;">
+
+            <Button fx:id="btnTabLogin" text="Iniciar sesión"
+                    onAction="#onMostrarLogin"
+                    style="-fx-background-color: #5b4fcf; -fx-text-fill: #ffffff;
+                           -fx-font-size: 13px; -fx-font-weight: bold;
+                           -fx-background-radius: 26; -fx-cursor: hand;
+                           -fx-pref-width: 136; -fx-pref-height: 36;"/>
+
+            <Button fx:id="btnTabRegistro" text="Registrarse"
+                    onAction="#onMostrarRegistro"
+                    style="-fx-background-color: transparent; -fx-text-fill: #5b4fcf;
+                           -fx-font-size: 13px; -fx-background-radius: 26;
+                           -fx-cursor: hand; -fx-pref-width: 136; -fx-pref-height: 36;"/>
+        </HBox>
+
+        <VBox fx:id="separador" style="-fx-pref-height: 28;"/>
+
+        <!-- ── Panel LOGIN ── -->
+        <VBox fx:id="panelLogin" spacing="14" visible="true" managed="true">
+
+            <VBox spacing="6">
+                <Label text="Usuario"
+                       style="-fx-font-size: 12px; -fx-font-weight: bold;
+                              -fx-text-fill: #444;"/>
+                <TextField fx:id="loginNombre"
+                           promptText="Tu nombre de usuario"
+                           style="-fx-background-color: #f8f8fb;
+                                  -fx-border-color: #ddd; -fx-border-radius: 8;
+                                  -fx-background-radius: 8; -fx-padding: 10 14 10 14;
+                                  -fx-font-size: 14px;"/>
+            </VBox>
+
+            <VBox spacing="6">
+                <Label text="Contraseña"
+                       style="-fx-font-size: 12px; -fx-font-weight: bold;
+                              -fx-text-fill: #444;"/>
+                <PasswordField fx:id="loginContrasena"
+                               promptText="Tu contraseña"
+                               style="-fx-background-color: #f8f8fb;
+                                      -fx-border-color: #ddd; -fx-border-radius: 8;
+                                      -fx-background-radius: 8; -fx-padding: 10 14 10 14;
+                                      -fx-font-size: 14px;"/>
+            </VBox>
+
+            <Label fx:id="lblErrorLogin" text=""
+                   style="-fx-text-fill: #e74c3c; -fx-font-size: 12px;"
+                   visible="false" managed="false"/>
+
+            <VBox style="-fx-pref-height: 6;"/>
+
+            <Button text="Iniciar sesión"
+                    onAction="#onLogin"
+                    style="-fx-background-color: #5b4fcf; -fx-text-fill: #ffffff;
+                           -fx-font-size: 14px; -fx-font-weight: bold;
+                           -fx-background-radius: 10; -fx-cursor: hand;
+                           -fx-pref-width: 300; -fx-pref-height: 44;"/>
+        </VBox>
+
+        <!-- ── Panel REGISTRO ── -->
+        <VBox fx:id="panelRegistro" spacing="14" visible="false" managed="false">
+
+            <VBox spacing="6">
+                <Label text="Usuario"
+                       style="-fx-font-size: 12px; -fx-font-weight: bold;
+                              -fx-text-fill: #444;"/>
+                <TextField fx:id="regNombre"
+                           promptText="Elige un nombre de usuario"
+                           style="-fx-background-color: #f8f8fb;
+                                  -fx-border-color: #ddd; -fx-border-radius: 8;
+                                  -fx-background-radius: 8; -fx-padding: 10 14 10 14;
+                                  -fx-font-size: 14px;"/>
+            </VBox>
+
+            <VBox spacing="6">
+                <Label text="Contraseña"
+                       style="-fx-font-size: 12px; -fx-font-weight: bold;
+                              -fx-text-fill: #444;"/>
+                <PasswordField fx:id="regContrasena"
+                               promptText="Crea una contraseña"
+                               style="-fx-background-color: #f8f8fb;
+                                      -fx-border-color: #ddd; -fx-border-radius: 8;
+                                      -fx-background-radius: 8; -fx-padding: 10 14 10 14;
+                                      -fx-font-size: 14px;"/>
+            </VBox>
+
+            <VBox spacing="6">
+                <Label text="Confirmar contraseña"
+                       style="-fx-font-size: 12px; -fx-font-weight: bold;
+                              -fx-text-fill: #444;"/>
+                <PasswordField fx:id="regConfirmar"
+                               promptText="Repite la contraseña"
+                               style="-fx-background-color: #f8f8fb;
+                                      -fx-border-color: #ddd; -fx-border-radius: 8;
+                                      -fx-background-radius: 8; -fx-padding: 10 14 10 14;
+                                      -fx-font-size: 14px;"/>
+            </VBox>
+
+            <Label fx:id="lblErrorRegistro" text=""
+                   style="-fx-text-fill: #e74c3c; -fx-font-size: 12px;"
+                   visible="false" managed="false"/>
+
+            <Label fx:id="lblExitoRegistro" text=""
+                   style="-fx-text-fill: #27ae60; -fx-font-size: 12px;"
+                   visible="false" managed="false"/>
+
+            <VBox style="-fx-pref-height: 6;"/>
+
+            <Button text="Crear cuenta"
+                    onAction="#onRegistrar"
+                    style="-fx-background-color: #5b4fcf; -fx-text-fill: #ffffff;
+                           -fx-font-size: 14px; -fx-font-weight: bold;
+                           -fx-background-radius: 10; -fx-cursor: hand;
+                           -fx-pref-width: 300; -fx-pref-height: 44;"/>
+        </VBox>
+
+    </VBox>
+</StackPane>

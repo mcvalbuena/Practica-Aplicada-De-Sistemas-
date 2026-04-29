@@ -6,4 +6,5 @@ module edu.poli.proyectooodle {
     opens edu.poli.proyectooodle.controlador to javafx.fxml;
     exports edu.poli.proyectooodle;
     exports edu.poli.proyectooodle.modelo;
+    exports edu.poli.proyectooodle.vista;
 }

@@ -1,4 +1,4 @@
-package edu.poli.proyectooodle;
+package edu.poli.proyectooodle.vista;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
