@@ -29,6 +29,8 @@ public class Usuario {
     public void setNombre(String newNombre) { nombre = newNombre;}
     public String getPasswordHash() {return passwordHash;}
     public void setPasswordHash(String newPasswordHash) {passwordHash = newPasswordHash;}
-    public int getScore() { return score; }
+    public int getScore() {
+        return score;
+    }
     public void setScore(int score) { this.score = score; }
 }

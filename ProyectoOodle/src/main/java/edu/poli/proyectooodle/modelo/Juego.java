@@ -9,37 +9,53 @@ public class Juego {
     private static Juego instancia;
 
     public static Juego getInstancia() {
-        if (instancia == null) instancia = new Juego();
+        if (instancia == null)
+        {
+            throw new IllegalStateException("Juego no ha sido inicializado");
+
+        }
         return instancia;
     }
 
+    public static Juego getInstancia(Usuario usuario) {
+        if (instancia == null)
+        {
+            instancia = new Juego(usuario);
+        }
+        return instancia;
+    }
 
-    private Ecuacion      numeroObjetivo;
+    public Usuario jugador;
+    private Ecuacion numeroObjetivo;
     private List<Integer> solucion;
     private List<Intento> intentosMaximos;
-    private boolean       partidaGanada;
-    private boolean       partidaFinalizada;
-    private Puntaje       score;
+    private boolean partidaGanada;
+    private boolean partidaFinalizada;
+    private Puntaje score;
 
 
     private boolean modoRango9  = true;
     private static final int MAX_INTENTOS = 6;
 
 
-    private Juego() {
+    public Juego(Usuario player) {
         intentosMaximos = new ArrayList<>();
+        jugador = player;
     }
 
 
 
-    public void iniciarJuego(int rango) {
+    public void iniciarJuego(int rango, Usuario usuario) {
+        jugador = usuario;
         modoRango9      = (rango == 9);
         numeroObjetivo  = new Ecuacion(rango);
         solucion        = new ArrayList<>(numeroObjetivo.getNumeros());
         intentosMaximos = new ArrayList<>();
         partidaGanada      = false;
         partidaFinalizada  = false;
-        score              = null;
+        score              = new Puntaje();
+        score.setIntentosUsados(0);
+        score.calcularPuntos();
     }
 
 
@@ -80,15 +96,21 @@ public class Juego {
     public Intento registrarIntento(List<Integer> valores) {
         if (partidaFinalizada || intentosMaximos.size() >= MAX_INTENTOS) return null;
 
+        // ❌ validar reglas primero
+        if (!numeroObjetivo.verificarReglas(valores)) {
+
+            return null; // inválido
+        }
+
         Intento intento = new Intento(valores);
         intentosMaximos.add(intento);
 
+        // ACTUALIZAR SCORE EN CADA INTENTO
+        score.setIntentosUsados(intentosMaximos.size());
+        score.setGano(false); // aún no ha ganado
+        score.calcularPuntos();
 
-        if (!verificarResultado()) {
-            intentosMaximos.remove(intento);
-            return null;
-        }
-
+        // ✅ ahora sí evaluar resultado
         if (intento.correcto(numeroObjetivo)) {
             partidaGanada = true;
             juegoTerminado();
@@ -96,7 +118,7 @@ public class Juego {
             juegoTerminado();
         }
 
-        return intento;
+        return intento; // ⚠️ SIEMPRE retorna intento válido
     }
 
 

@@ -36,6 +36,38 @@
     </HBox>
 
     <!-- ═══════════════════════════════════════
+     PANEL INFO USUARIO
+═══════════════════════════════════════ -->
+    <HBox spacing="40" alignment="CENTER_LEFT"
+          style="-fx-background-color: #ffffff; -fx-background-radius: 12; -fx-padding: 15 30 15 30; -fx-border-color: #e8e8e8; -fx-border-width: 0 0 1 0;">
+
+        <!-- Usuario -->
+        <VBox spacing="4">
+            <Label text="Usuario"
+                   style="-fx-text-fill: #888; -fx-font-size: 12px;"/>
+            <Label fx:id="lblUsuario" text="---"
+                   style="-fx-text-fill: #030213; -fx-font-size: 16px; -fx-font-weight: bold;"/>
+        </VBox>
+
+        <!-- Puntaje total -->
+        <VBox spacing="4">
+            <Label text="Puntaje Total"
+                   style="-fx-text-fill: #888; -fx-font-size: 12px;"/>
+            <Label fx:id="lblPuntajeTotal" text="0"
+                   style="-fx-text-fill: #5b4fcf; -fx-font-size: 16px; -fx-font-weight: bold;"/>
+        </VBox>
+
+        <!-- Puntaje partida -->
+        <VBox spacing="4">
+            <Label text="Puntaje Partida"
+                   style="-fx-text-fill: #888; -fx-font-size: 12px;"/>
+            <Label fx:id="lblPuntajePartida" text="0"
+                   style="-fx-text-fill: #f472b6; -fx-font-size: 16px; -fx-font-weight: bold;"/>
+        </VBox>
+
+    </HBox>
+
+    <!-- ═══════════════════════════════════════
          CONTENIDO PRINCIPAL
     ═══════════════════════════════════════ -->
     <HBox alignment="CENTER" spacing="40" VBox.vgrow="ALWAYS">

@@ -67,6 +67,7 @@ public class UserDAO {
              PreparedStatement ps = con.prepareStatement(sql)) {
 
             ps.setInt(1, newScore);
+
             ps.setString(2, username);
 
             return ps.executeUpdate() > 0;

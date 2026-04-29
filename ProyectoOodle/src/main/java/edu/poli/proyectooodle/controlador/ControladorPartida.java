@@ -1,17 +1,24 @@
 package edu.poli.proyectooodle.controlador;
 
+import edu.poli.proyectooodle.Services.UserDAO;
 import edu.poli.proyectooodle.vista.GestorEscenas;
 import edu.poli.proyectooodle.modelo.Intento;
 import edu.poli.proyectooodle.modelo.Juego;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ControladorPartida {
 
+    // -- Usuario Panel --
+    @FXML private Label lblUsuario;
+    @FXML private Label lblPuntajeTotal;
+    @FXML private Label lblPuntajePartida;
     // ── Celdas por fila ──────────────────────────────────────────────────────────
     @FXML private Button f1c1, f1c2, f1c3, f1c4, f1resultado;
     @FXML private Button f2c1, f2c2, f2c3, f2c4, f2resultado;
@@ -25,17 +32,20 @@ public class ControladorPartida {
     private int      filaActual        = 0;         // fila en juego (0-5)
 
     /** Modelo compartido */
-    private final Juego juego = Juego.getInstancia();
+    private Juego juego;
 
     /** Matriz de celdas [fila][columna] para acceso programático */
     private Button[][] celdas;
     /** Botones de resultado por fila */
     private Button[]   resultados;
+    private UserDAO _userDAO = new UserDAO();
+
 
     // ── Inicialización ────────────────────────────────────────────────────────────
 
     @FXML
     public void initialize() {
+
         // Construir matrices de acceso a los botones del FXML
         celdas = new Button[][]{
                 {f1c1, f1c2, f1c3, f1c4},
@@ -50,12 +60,36 @@ public class ControladorPartida {
                 f4resultado, f5resultado, f6resultado
         };
 
+        juego = Juego.getInstancia(); // ahora sí, después del login
+
+        if (juego == null) {
+            System.out.println("Juego no inicializado aún");
+            return;
+        }
+
+        juego.iniciarJuego(juego.getRangoActual(), juego.jugador);
+
         // Iniciar una partida nueva con el rango actualmente seleccionado
-        juego.iniciarJuego(juego.getRangoActual());
+        juego.iniciarJuego(juego.getRangoActual(), juego.jugador);
         filaActual = 0;
 
         // Mostrar el resultado objetivo en todos los botones de resultado
         mostrarObjetivo();
+
+        // 👤 Usuario
+        if (juego.jugador != null) {
+            lblUsuario.setText(juego.jugador.getNombre());
+        }
+
+        // ⭐ Puntaje total (si tienes sistema persistente)
+        if (juego.getScore() != null) {
+            lblPuntajeTotal.setText(String.valueOf(juego.jugador.getScore()));
+        } else {
+            lblPuntajeTotal.setText("0");
+        }
+
+        // 🎯 Puntaje partida (inicial)
+        lblPuntajePartida.setText(""+juego.getScore().getPuntos());
     }
 
     /** Escribe "= X" en cada botón de resultado para que el jugador vea el objetivo. */
@@ -76,11 +110,13 @@ public class ControladorPartida {
 
     @FXML
     protected void onRestart() {
-        juego.iniciarJuego(juego.getRangoActual());
+        juego.iniciarJuego(juego.getRangoActual(), juego.jugador);
         filaActual         = 0;
         celdaSeleccionada  = null;
         limpiarTablero();
         mostrarObjetivo();
+        lblPuntajePartida.setText(String.valueOf(juego.getScore().getPuntos()));
+        lblPuntajeTotal.setText(String.valueOf(juego.jugador.getScore()));
     }
 
     // ── Selección de celda ────────────────────────────────────────────────────────
@@ -122,6 +158,7 @@ public class ControladorPartida {
     @FXML
     protected void onCheck() {
         if (filaActual < celdas.length) procesarIntento(filaActual);
+        lblPuntajePartida.setText(String.valueOf(juego.getScore().getPuntos()));
     }
 
     // ── Verificar fila (botón resultado de cada fila) ─────────────────────────────
@@ -131,6 +168,7 @@ public class ControladorPartida {
         int fila = obtenerFilaDe((Button) e.getSource());
         // Solo procesar si el jugador clickea el resultado de la fila activa
         if (fila == filaActual) procesarIntento(fila);
+        lblPuntajePartida.setText(String.valueOf(juego.getScore().getPuntos()));
     }
 
     // ── Lógica central: procesar un intento ───────────────────────────────────────
@@ -156,6 +194,7 @@ public class ControladorPartida {
 
         // 2. Enviar al modelo
         Intento intento = juego.registrarIntento(valores);
+        lblPuntajePartida.setText(String.valueOf(juego.getScore().getPuntos()));
 
         if (intento == null) {
             // La suma NO coincide con el objetivo → intento inválido, no se descuenta
@@ -183,6 +222,18 @@ public class ControladorPartida {
         if (juego.isPartidaGanada()) {
             resultados[fila].setStyle(estiloResultadoGanado());
             resultados[fila].setText("✓");
+
+            int puntosPartida = juego.getScore().getPuntos();
+
+            int nuevoTotal = juego.jugador.getScore() + puntosPartida;
+
+
+            // 🔥 actualizar modelo en memoria
+            juego.jugador.setScore(nuevoTotal);
+            // 🔥 actualizar UI
+            lblPuntajeTotal.setText(String.valueOf(nuevoTotal)); // UI
+
+            _userDAO.updateScore(juego.jugador.getNombre(), nuevoTotal);
         } else if (juego.isPartidaFinalizada()) {
             mostrarSolucion();
         } else {

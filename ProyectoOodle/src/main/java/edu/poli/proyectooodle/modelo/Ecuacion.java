@@ -63,14 +63,8 @@ public class Ecuacion {
     {
         Set<Integer> set = new HashSet<>(numbers);
 
-        if (set.size() != numbers.size()) {
-            //hay numeros repetidos
-            return false;
-        } else {
+        return set.size() == numbers.size(); // solo repetidos
 
-            //no hay numero repetidos
-            return true;
-        }
     }
 
 

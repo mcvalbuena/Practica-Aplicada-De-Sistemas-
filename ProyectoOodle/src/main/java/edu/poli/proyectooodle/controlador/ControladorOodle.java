@@ -1,5 +1,6 @@
 package edu.poli.proyectooodle.controlador;
 
+import edu.poli.proyectooodle.modelo.Usuario;
 import edu.poli.proyectooodle.vista.GestorEscenas;
 import edu.poli.proyectooodle.modelo.Intento;
 import edu.poli.proyectooodle.modelo.Juego;
@@ -22,16 +23,19 @@ public class ControladorOodle {
     @FXML private Button btnNuevaPartida;
     @FXML private Label  lblRangoRegla;
 
-    // ── Estado ───────────────────────────────────────────────────────────────────
-    private boolean minuteroActivo = false;
-
     /** Instancia compartida del modelo (Singleton). */
-    private final Juego model = Juego.getInstancia();
+    private Juego model;
 
     // ── Inicialización ────────────────────────────────────────────────────────────
 
     @FXML
     public void initialize() {
+
+        // 👇 SIEMPRE hay preview
+        model = new Juego(new Usuario("preview", ""));
+
+        model.iniciarJuego(9, model.jugador);
+
         actualizarVista();
     }
 
@@ -39,65 +43,24 @@ public class ControladorOodle {
 
     @FXML
     protected void onNuevaPartida() throws IOException {
-        GestorEscenas.irA("NuevaPartida.fxml");
+        GestorEscenas.irA("LoginRegistro.fxml");
     }
 
     // ── Verificación de filas (pantalla de inicio) ────────────────────────────────
 
     @FXML
     protected void onVerificarFila1() {
-        procesarFilaHome(
-                new Button[]{celda1_1, celda1_2, celda1_3, celda1_4},
-                resultado1
-        );
+
     }
 
     @FXML
     protected void onVerificarFila2() {
-        procesarFilaHome(
-                new Button[]{celda2_1, celda2_2, celda2_3, celda2_4},
-                resultado2
-        );
+
     }
 
     @FXML
     protected void onVerificarFila3() {
-        procesarFilaHome(
-                new Button[]{celda3_1, celda3_2, celda3_3, celda3_4},
-                resultado3
-        );
-    }
 
-    /**
-     * Lógica compartida para verificar cualquier fila de esta vista.
-     * Recoge los valores, los envía al modelo y colorea las celdas.
-     */
-    private void procesarFilaHome(Button[] celdas, Button btnResultado) {
-        if (model.getNumeroObjetivo() == null || model.isPartidaFinalizada()) return;
-
-        List<Integer> valores = new ArrayList<>();
-        for (Button celda : celdas) {
-            String texto = celda.getText().trim();
-            if (texto.isEmpty()) return;                       // fila incompleta
-            try {
-                valores.add(Integer.parseInt(texto));
-            } catch (NumberFormatException e) {
-                return;
-            }
-        }
-
-        Intento intento = model.registrarIntento(valores);
-        if (intento == null) {
-            // Aritmética incorrecta: feedback visual en el botón resultado
-            btnResultado.setStyle(estiloError());
-            btnResultado.setText("✗");
-            return;
-        }
-
-        if (model.isPartidaGanada()) {
-            btnResultado.setStyle(estiloVerde());
-            btnResultado.setText("✓");
-        }
     }
 
     // ── Reanudar ─────────────────────────────────────────────────────────────────
@@ -113,12 +76,16 @@ public class ControladorOodle {
     @FXML
     protected void onCambiarModo() {
         model.toggleModo();
+        int rango = model.getModoActual() ? 9 : 12;
+        model.iniciarJuego(rango, model.jugador);
         actualizarVista();
     }
 
     // ── Actualización visual ──────────────────────────────────────────────────────
 
     private void actualizarVista() {
+        if (model == null) return;
+
         if (model.getModoActual()) {
             btnRango9.setStyle(estiloBotonActivo());
             btnRango12.setStyle(estiloBotonInactivo());
@@ -144,17 +111,5 @@ public class ControladorOodle {
                 "-fx-font-size: 13px; -fx-border-color: #cbced4; -fx-border-width: 1.5; " +
                 "-fx-border-radius: 20; -fx-background-radius: 20; " +
                 "-fx-padding: 7 18 7 18; -fx-cursor: hand;";
-    }
-
-    private String estiloError() {
-        return "-fx-background-color: #e74c3c; -fx-text-fill: #ffffff; " +
-                "-fx-background-radius: 8; -fx-border-radius: 8; " +
-                "-fx-pref-width: 60; -fx-pref-height: 60; -fx-font-weight: bold;";
-    }
-
-    private String estiloVerde() {
-        return "-fx-background-color: #6aaa64; -fx-text-fill: #ffffff; " +
-                "-fx-background-radius: 8; -fx-pref-width: 60; -fx-pref-height: 60; " +
-                "-fx-font-weight: bold;";
     }
 }

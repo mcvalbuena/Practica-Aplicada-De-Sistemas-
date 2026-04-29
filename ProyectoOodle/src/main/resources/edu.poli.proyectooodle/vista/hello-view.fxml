@@ -21,7 +21,7 @@
         <Button fx:id="btnReanudar" onAction="#onReanudar" style="-fx-background-color: transparent; -fx-border-color: #030213; -fx-border-width: 1.5; -fx-border-radius: 20; -fx-background-radius: 20; -fx-text-fill: #030213; -fx-font-size: 13px; -fx-font-weight: bold; -fx-padding: 6 16 6 16; -fx-cursor: hand;" text="Reanudar" />
 
         <Label style="-fx-font-size: 14px; -fx-text-fill: #030213;" text="Minutero" />
-        <Button fx:id="btnMinutero" onAction="#onToggleMinutero" style="-fx-background-color: #cbced4; -fx-background-radius: 20; -fx-pref-width: 44; -fx-pref-height: 24; -fx-cursor: hand;" text="○" />    </HBox>
+    </HBox>
 
 
     <VBox alignment="TOP_CENTER" spacing="20" VBox.vgrow="ALWAYS">

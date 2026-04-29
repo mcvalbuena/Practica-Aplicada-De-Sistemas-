@@ -1,5 +1,6 @@
 package edu.poli.proyectooodle.controlador;
 
+import edu.poli.proyectooodle.modelo.Autenticacion;
 import edu.poli.proyectooodle.vista.GestorEscenas;
 import edu.poli.proyectooodle.modelo.Juego;
 import edu.poli.proyectooodle.modelo.Usuario;
@@ -36,6 +37,7 @@ public class ControladorLoginRegistro {
 
     // ── Dependencias ──────────────────────────────────────────────────────────────
     private final UserDAO usuarioDAO = new UserDAO();
+    private final Autenticacion autenticacion = new Autenticacion();
 
     // ── Toggle de pestañas ────────────────────────────────────────────────────────
 
@@ -87,15 +89,16 @@ public class ControladorLoginRegistro {
         }
 
         // Verificar contraseña
-        if (!usuario.getPasswordHash().equals(contrasena)) {
-            mostrarError(lblErrorLogin, "Contraseña incorrecta.");
+        if (!autenticacion.ValidarLogeo(nombre, contrasena)) {
+            mostrarError(lblErrorLogin, "Usuario o contraseña invalidos.");
             loginContrasena.clear();
             return;
         }
 
         // Login exitoso → guardar usuario en el Juego y navegar al menú
-        Juego.getInstancia().(usuario);
-        GestorEscenas.irA("hello-view.fxml");
+        Juego.getInstancia(usuario);
+        //Juego.getInstancia().(usuario);
+        GestorEscenas.irA("NuevaPartida.fxml");
     }
 
     // ── Registro ──────────────────────────────────────────────────────────────────
@@ -113,7 +116,7 @@ public class ControladorLoginRegistro {
         }
 
         // Longitud mínima de nombre
-        if (nombre.length() < 3) {
+        if (nombre.length() < 2) {
             mostrarError(lblErrorRegistro, "El usuario debe tener al menos 3 caracteres.");
             return;
         }
@@ -132,14 +135,14 @@ public class ControladorLoginRegistro {
         }
 
         // Verificar que el nombre no esté tomado
-        if (usuarioDAO.buscarPorNombre(nombre) != null) {
+        if (usuarioDAO.getByUsername(nombre) != null) {
             mostrarError(lblErrorRegistro, "Ese nombre de usuario ya existe.");
             return;
         }
 
         // Crear y persistir el usuario
-        Usuario nuevo = new Usuario(0, nombre, contrasena);
-        int idGenerado = usuarioDAO.insertar(nuevo);
+        Usuario nuevo = new Usuario(nombre, contrasena);
+        int idGenerado = nuevo.getId();
 
         if (idGenerado == -1) {
             mostrarError(lblErrorRegistro, "Error al crear la cuenta. Intenta de nuevo.");
@@ -147,6 +150,7 @@ public class ControladorLoginRegistro {
         }
 
         // Registro exitoso → limpiar campos y sugerir login
+        autenticacion.registrar(nuevo.getNombre(), nuevo.getPasswordHash());
         ocultarLabel(lblErrorRegistro);
         mostrarExito(lblExitoRegistro, "¡Cuenta creada! Ya puedes iniciar sesión.");
         regNombre.clear();
