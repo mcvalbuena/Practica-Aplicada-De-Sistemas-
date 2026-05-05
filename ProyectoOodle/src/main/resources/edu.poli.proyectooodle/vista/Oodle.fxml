@@ -12,15 +12,9 @@
             <Insets bottom="10" left="24" right="24" top="10" />
         </padding>
 
-        <Button style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-font-size: 20px; -fx-cursor: hand;" text="⌂" />
-
         <HBox alignment="CENTER" HBox.hgrow="ALWAYS">
             <Label style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #030213;" text="Ooodle" />
         </HBox>
-
-        <Button fx:id="btnReanudar" onAction="#onReanudar" style="-fx-background-color: transparent; -fx-border-color: #030213; -fx-border-width: 1.5; -fx-border-radius: 20; -fx-background-radius: 20; -fx-text-fill: #030213; -fx-font-size: 13px; -fx-font-weight: bold; -fx-padding: 6 16 6 16; -fx-cursor: hand;" text="Reanudar" />
-
-        <Label style="-fx-font-size: 14px; -fx-text-fill: #030213;" text="Minutero" />
     </HBox>
 
 
@@ -48,17 +42,17 @@
                 <Label style="-fx-font-size: 20px; -fx-text-fill: #717182; -fx-font-weight: bold;" text="×" />
                 <Button fx:id="celda1_3" style="-fx-background-color: #ffffff; -fx-border-color: #cbced4; -fx-border-width: 2; -fx-border-radius: 10; -fx-background-radius: 10; -fx-pref-width: 56; -fx-pref-height: 56; -fx-font-size: 20px; -fx-font-weight: bold; -fx-cursor: hand;" text="4" />
                 <Label style="-fx-font-size: 20px; -fx-text-fill: #717182; -fx-font-weight: bold;" text="÷" />
-                <Button fx:id="celda1_4" style="-fx-background-color: #ffde20; -fx-border-color: #f5c400; -fx-border-width: 2; -fx-border-radius: 10; -fx-background-radius: 10; -fx-pref-width: 56; -fx-pref-height: 56; -fx-font-size: 20px; -fx-font-weight: bold; -fx-cursor: hand;" text="2" />
+                <Button fx:id="celda1_4" style="-fx-background-color: #ffffff; -fx-border-color: #cbced4; -fx-border-width: 2; -fx-border-radius: 10; -fx-background-radius: 10; -fx-pref-width: 56; -fx-pref-height: 56; -fx-font-size: 20px; -fx-font-weight: bold; -fx-cursor: hand;" text="2" />
                 <Label style="-fx-font-size: 20px; -fx-text-fill: #717182; -fx-font-weight: bold;" text="=" />
                 <Button fx:id="resultado1" onAction="#onVerificarFila1" style="-fx-background-color: #f8d7d7; -fx-border-color: #e8a0a0; -fx-border-width: 2; -fx-border-radius: 10; -fx-background-radius: 10; -fx-pref-width: 64; -fx-pref-height: 56; -fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #c0392b; -fx-cursor: hand;" text="?" />
             </HBox>
 
             <HBox alignment="CENTER" spacing="10">
-                <Button fx:id="celda2_1" style="-fx-background-color: #ffde20; -fx-border-color: #f5c400; -fx-border-width: 2; -fx-border-radius: 10; -fx-background-radius: 10; -fx-pref-width: 56; -fx-pref-height: 56; -fx-font-size: 20px; -fx-font-weight: bold; -fx-cursor: hand;" text="7" />
+                <Button fx:id="celda2_1" style="-fx-background-color: #ffffff; -fx-border-color: #cbced4; -fx-border-width: 2; -fx-border-radius: 10; -fx-background-radius: 10; -fx-pref-width: 56; -fx-pref-height: 56; -fx-font-size: 20px; -fx-font-weight: bold; -fx-cursor: hand;" text="7" />
                 <Label style="-fx-font-size: 20px; -fx-text-fill: #717182; -fx-font-weight: bold;" text="+" />
                 <Button fx:id="celda2_2" style="-fx-background-color: #ffffff; -fx-border-color: #cbced4; -fx-border-width: 2; -fx-border-radius: 10; -fx-background-radius: 10; -fx-pref-width: 56; -fx-pref-height: 56; -fx-font-size: 20px; -fx-font-weight: bold; -fx-cursor: hand;" text="2" />
                 <Label style="-fx-font-size: 20px; -fx-text-fill: #717182; -fx-font-weight: bold;" text="×" />
-                <Button fx:id="celda2_3" style="-fx-background-color: #ffde20; -fx-border-color: #f5c400; -fx-border-width: 2; -fx-border-radius: 10; -fx-background-radius: 10; -fx-pref-width: 56; -fx-pref-height: 56; -fx-font-size: 20px; -fx-font-weight: bold; -fx-cursor: hand;" text="6" />
+                <Button fx:id="celda2_3" style="-fx-background-color: #ffffff; -fx-border-color: #cbced4; -fx-border-width: 2; -fx-border-radius: 10; -fx-background-radius: 10; -fx-pref-width: 56; -fx-pref-height: 56; -fx-font-size: 20px; -fx-font-weight: bold; -fx-cursor: hand;" text="6" />
                 <Label style="-fx-font-size: 20px; -fx-text-fill: #717182; -fx-font-weight: bold;" text="÷" />
                 <Button fx:id="celda2_4" style="-fx-background-color: #ffffff; -fx-border-color: #cbced4; -fx-border-width: 2; -fx-border-radius: 10; -fx-background-radius: 10; -fx-pref-width: 56; -fx-pref-height: 56; -fx-font-size: 20px; -fx-font-weight: bold; -fx-cursor: hand;" text="8" />
                 <Label style="-fx-font-size: 20px; -fx-text-fill: #717182; -fx-font-weight: bold;" text="=" />
@@ -80,7 +74,7 @@
         </VBox>
 
 
-        <HBox alignment="TOP_LEFT" spacing="16" style="-fx-background-color: #ffffff; -fx-background-radius: 16; -fx-border-color: #e0e0e0; -fx-border-width: 1; -fx-border-radius: 16;">
+        <HBox alignment="TOP_LEFT" prefHeight="199.0" prefWidth="820.0" spacing="16" style="-fx-background-color: #ffffff; -fx-background-radius: 16; -fx-border-color: #e0e0e0; -fx-border-width: 1; -fx-border-radius: 16;">
             <padding>
                 <Insets bottom="20" left="24" right="24" top="20" />
             </padding>
@@ -92,34 +86,30 @@
 
                 <Label fx:id="lblRangoRegla" style="-fx-font-size: 13px; -fx-text-fill: #444455;" text="Utilice los números del 1 al 9 solo una vez, o del 1 al 12." />
 
-                <Label style="-fx-font-size: 13px; -fx-text-fill: #444455;" text="Haz clic en el cuadro rojo de respuesta para comprobar la solución." />
+                <Label style="-fx-font-size: 13px; -fx-text-fill: #444455;" text="Tienes que rellenar las casillas vacias para encontrar la solucion a la respuesta de la ecuacion" />
 
                 <HBox alignment="CENTER_LEFT" spacing="8">
                     <Region prefHeight="16" prefWidth="16" style="-fx-background-color: #4caf50; -fx-background-radius: 4;" />
                     <Label style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #030213;" text="Verde = " />
-                    <Label style="-fx-font-size: 13px; -fx-text-fill: #444455;" text="¡El número está en la posición correcta!" />
+                    <Label style="-fx-font-size: 13px; -fx-text-fill: #444455;" text="¡La ecuacion dada es correcta!" />
                 </HBox>
+
+
+                <HBox alignment="CENTER_LEFT" spacing="8" />
 
                 <HBox alignment="CENTER_LEFT" spacing="8">
-                    <Region prefHeight="16" prefWidth="16" style="-fx-background-color: #f5c400; -fx-background-radius: 4;" />
-                    <Label style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #030213;" text="Amarillo = " />
-                    <Label style="-fx-font-size: 13px; -fx-text-fill: #444455;" text="Número en posición incorrecta" />
+                    <Region prefHeight="16" prefWidth="16" style="-fx-background-color: #ff0000; -fx-background-radius: 4;" />
+                    <Label style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #030213;" text="Rojo  = " />
+                    <Label style="-fx-font-size: 13px; -fx-text-fill: #444455;" text="¡La ecuacion dada es incorrecta!" />
                 </HBox>
-
-
-                <HBox alignment="CENTER_LEFT" spacing="8">
-                    <Region prefHeight="16" prefWidth="16" style="-fx-background-color: #9e9ea8; -fx-background-radius: 4;" />
-                    <Label style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #030213;" text="Gris = " />
-                    <Label style="-fx-font-size: 13px; -fx-text-fill: #444455;" text="Número no presente en la ecuación" />
-                </HBox>
+            <Label layoutX="10.0" layoutY="64.0" style="-fx-font-size: 13px; -fx-text-fill: #444455;" text="Haz clic en el cuadro &quot;Check&quot; de respuesta para comprobar la solución." />
 
             </VBox>
         </HBox>
 
         <!-- Botón Nueva Partida -->
         <HBox alignment="CENTER">
-            <Button fx:id="btnNuevaPartida" text="Nueva Partida" onAction="#onNuevaPartida"
-                    style="-fx-background-color: #5b4fcf; -fx-text-fill: #ffffff; -fx-font-size: 13px; -fx-font-weight: bold; -fx-background-radius: 20; -fx-padding: 7 18 7 18; -fx-cursor: hand;"/>
+            <Button fx:id="btnNuevaPartida" onAction="#onNuevaPartida" style="-fx-background-color: #5b4fcf; -fx-text-fill: #ffffff; -fx-font-size: 13px; -fx-font-weight: bold; -fx-background-radius: 20; -fx-padding: 7 18 7 18; -fx-cursor: hand;" text="Nueva Partida" />
         </HBox>
 
     </VBox>

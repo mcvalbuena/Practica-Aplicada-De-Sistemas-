@@ -1,6 +1,6 @@
 package edu.poli.proyectooodle.controlador;
 
-import edu.poli.proyectooodle.modelo.Autenticacion;
+import edu.poli.proyectooodle.Services.Autenticacion;
 import edu.poli.proyectooodle.vista.GestorEscenas;
 import edu.poli.proyectooodle.modelo.Juego;
 import edu.poli.proyectooodle.modelo.Usuario;

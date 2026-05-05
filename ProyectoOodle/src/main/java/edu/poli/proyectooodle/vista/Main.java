@@ -9,7 +9,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         GestorEscenas.setStage(stage);
-        GestorEscenas.irA("hello-view.fxml");
+        GestorEscenas.irA("Oodle.fxml");
         stage.setTitle("Oodle Game");
         stage.show();
     }

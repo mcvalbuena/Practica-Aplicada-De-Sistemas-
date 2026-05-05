@@ -1,6 +1,6 @@
-package edu.poli.proyectooodle.modelo;
+package edu.poli.proyectooodle.Services;
 
-import edu.poli.proyectooodle.Services.UserDAO;
+import edu.poli.proyectooodle.modelo.Usuario;
 
 public class Autenticacion {
     UserDAO _userDAO = new UserDAO();

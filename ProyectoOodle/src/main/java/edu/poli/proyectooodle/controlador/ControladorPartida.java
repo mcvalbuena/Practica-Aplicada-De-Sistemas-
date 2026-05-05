@@ -105,7 +105,7 @@ public class ControladorPartida {
 
     @FXML
     protected void onHome() throws IOException {
-        GestorEscenas.irA("hello-view.fxml");
+        GestorEscenas.irA("Oodle.fxml");
     }
 
     @FXML

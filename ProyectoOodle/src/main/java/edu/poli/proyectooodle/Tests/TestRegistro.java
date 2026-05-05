@@ -1,7 +1,7 @@
 package edu.poli.proyectooodle.Tests;
 
 import edu.poli.proyectooodle.Services.UserDAO;
-import edu.poli.proyectooodle.modelo.Autenticacion;
+import edu.poli.proyectooodle.Services.Autenticacion;
 import edu.poli.proyectooodle.modelo.Usuario;
 
 public class TestRegistro {
