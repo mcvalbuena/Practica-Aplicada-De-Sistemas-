@@ -96,7 +96,7 @@ public class ControladorLoginRegistro {
         }
 
         // Login exitoso → guardar usuario en el Juego y navegar al menú
-        Juego.getInstancia(usuario);
+        Juego partida = new Juego(usuario);
         //Juego.getInstancia().(usuario);
         GestorEscenas.irA("NuevaPartida.fxml");
     }

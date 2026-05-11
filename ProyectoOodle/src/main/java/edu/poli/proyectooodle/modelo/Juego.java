@@ -8,23 +8,6 @@ public class Juego {
 
     private static Juego instancia;
 
-    public static Juego getInstancia() {
-        if (instancia == null)
-        {
-            throw new IllegalStateException("Juego no ha sido inicializado");
-
-        }
-        return instancia;
-    }
-
-    public static Juego getInstancia(Usuario usuario) {
-        if (instancia == null)
-        {
-            instancia = new Juego(usuario);
-        }
-        return instancia;
-    }
-
     public Usuario jugador;
     private Ecuacion numeroObjetivo;
     private List<Integer> solucion;
@@ -33,7 +16,6 @@ public class Juego {
     private boolean partidaFinalizada;
     private Puntaje score;
 
-
     private boolean modoRango9  = true;
     private static final int MAX_INTENTOS = 6;
 
@@ -41,9 +23,12 @@ public class Juego {
     public Juego(Usuario player) {
         intentosMaximos = new ArrayList<>();
         jugador = player;
+        instancia = this;
     }
 
-
+    public static Juego getInstancia() {
+        return instancia;
+    }
 
     public void iniciarJuego(int rango, Usuario usuario) {
         jugador = usuario;
@@ -56,30 +41,6 @@ public class Juego {
         score              = new Puntaje();
         score.setIntentosUsados(0);
         score.calcularPuntos();
-    }
-
-
-    public boolean verificarResultado() {
-        if (intentosMaximos.isEmpty()) return false;
-        Intento ultimo = ultimoIntento();
-        List<Integer> vals = ultimo.getValores();
-
-        //debug
-        for (Integer integer : vals)
-        {
-            System.out.println("valor indice:"+vals.indexOf(integer)+" es = "+integer);
-        }
-        //fin debug
-
-        System.out.println();
-
-        if (numeroObjetivo.verificarReglas(vals))
-        {
-            return true;
-        }else
-        {
-            return false;
-        }
     }
 
 
@@ -121,19 +82,13 @@ public class Juego {
         return intento; // ⚠️ SIEMPRE retorna intento válido
     }
 
-
-
-
     public void toggleModo() {
         modoRango9 = !modoRango9;
     }
 
-
     public boolean getModoActual() { return modoRango9; }
 
-
     public int getRangoActual() { return modoRango9 ? 9 : 12; }
-
 
     public Ecuacion      getNumeroObjetivo()       { return numeroObjetivo; }
     public List<Integer> getSolucion()             { return solucion; }
@@ -143,7 +98,6 @@ public class Juego {
     public int           getNumeroIntentosUsados() { return intentosMaximos.size(); }
     public Puntaje       getScore()                { return score; }
     public void          setScore(Puntaje score)   { this.score = score; }
-
 
     private Intento ultimoIntento() {
         return intentosMaximos.get(intentosMaximos.size() - 1);

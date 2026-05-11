@@ -1,7 +1,6 @@
 package edu.poli.proyectooodle.controlador;
 
 import edu.poli.proyectooodle.Services.UserDAO;
-import edu.poli.proyectooodle.Tests.TemporizadorSesion;
 import edu.poli.proyectooodle.vista.GestorEscenas;
 import edu.poli.proyectooodle.modelo.Intento;
 import edu.poli.proyectooodle.modelo.Juego;
