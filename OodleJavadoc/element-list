@@ -1,0 +1,6 @@
+module:edu.poli.proyectooodle
+edu.poli.proyectooodle.controlador
+edu.poli.proyectooodle.modelo
+edu.poli.proyectooodle.Services
+edu.poli.proyectooodle.Tests
+edu.poli.proyectooodle.vista
