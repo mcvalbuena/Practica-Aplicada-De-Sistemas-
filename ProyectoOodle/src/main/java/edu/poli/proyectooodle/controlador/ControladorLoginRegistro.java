@@ -95,9 +95,17 @@ public class ControladorLoginRegistro {
             return;
         }
 
-        // Login exitoso → guardar usuario en el Juego y navegar al menú
-        Juego partida = new Juego(usuario);
-        //Juego.getInstancia().(usuario);
+        // DESPUÉS
+        int rangoSeleccionado = Juego.getInstancia() != null
+                ? Juego.getInstancia().getRangoActual()  // lee 9 o 12 del singleton actual
+                : 9;                                      // fallback por defecto
+
+        Juego partida = new Juego(usuario);              // crea nueva instancia (resetea a 9)
+
+        if (rangoSeleccionado == 12) {
+            partida.toggleModo();                        // restaura el modo 12 si fue seleccionado
+        }
+
         GestorEscenas.irA("NuevaPartida.fxml");
     }
 

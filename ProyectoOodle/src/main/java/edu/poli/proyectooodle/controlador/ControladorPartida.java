@@ -8,7 +8,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 
+import javax.swing.JOptionPane;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +25,7 @@ public class ControladorPartida {
     @FXML private Button f1c1, f1c2, f1c3, f1c4, f1resultado;
     @FXML private Button f2c1, f2c2, f2c3, f2c4, f2resultado;
     @FXML private Button f3c1, f3c2, f3c3, f3c4, f3resultado;
+    @FXML private HBox filaModo12;
     @FXML private Button f4c1, f4c2, f4c3, f4c4, f4resultado;
     @FXML private Button f5c1, f5c2, f5c3, f5c4, f5resultado;
     @FXML private Button f6c1, f6c2, f6c3, f6c4, f6resultado;
@@ -77,7 +80,7 @@ public class ControladorPartida {
 
         // Mostrar el resultado objetivo en todos los botones de resultado
         mostrarObjetivo();
-
+        actualizarTeclado(); // ← aquí
         // 👤 Usuario
         if (juego.jugador != null) {
             lblUsuario.setText(juego.jugador.getNombre());
@@ -119,6 +122,7 @@ public class ControladorPartida {
         mostrarObjetivo();
         lblPuntajePartida.setText(String.valueOf(juego.getScore().getPuntos()));
         lblPuntajeTotal.setText(String.valueOf(juego.jugador.getScore()));
+        actualizarTeclado(); // ← aquí
     }
 
     // ── Selección de celda ────────────────────────────────────────────────────────
@@ -183,7 +187,8 @@ public class ControladorPartida {
         for (Button celda : celdas[fila]) {
             String texto = celda.getText().trim();
             if (texto.isEmpty()) {
-                marcarErrorFila(fila, "!");   // celda vacía
+                marcarErrorFila(fila, "!");
+                JOptionPane.showMessageDialog(null,"Porfavor llena todos los cuadros"); // celda vacía
                 return;
             }
             try {
@@ -201,6 +206,8 @@ public class ControladorPartida {
         if (intento == null) {
             // La suma NO coincide con el objetivo → intento inválido, no se descuenta
             marcarErrorFila(fila, "✗");
+            JOptionPane.showMessageDialog(null,"Porfavor no repitas los mismos digitos"); // celda vacía
+
             return;
         }
 
@@ -224,6 +231,8 @@ public class ControladorPartida {
         if (juego.isPartidaGanada()) {
             resultados[fila].setStyle(estiloResultadoGanado());
             resultados[fila].setText("✓");
+            JOptionPane.showMessageDialog(null, "¡Partida Ganada!, Presiona Restart para empezar nueva partida");
+
 
             int puntosPartida = juego.getScore().getPuntos();
 
@@ -293,6 +302,7 @@ public class ControladorPartida {
             );
         }
         resultados[filaActual].setText(":(");
+        JOptionPane.showMessageDialog(null, "¡Partida Perdida!, Presiona Restart para empezar nueva partida");
         resultados[filaActual].setStyle(estiloError());
     }
 
@@ -353,6 +363,13 @@ public class ControladorPartida {
         }
     }
 
+    private void actualizarTeclado() {
+        boolean esRango12 = !juego.getModoActual();
+        System.out.println("Modo rango12: " + esRango12); // ← debug
+        filaModo12.setVisible(esRango12);
+        filaModo12.setManaged(esRango12);
+
+    }
 
 
     // ── Estilos reutilizables ─────────────────────────────────────────────────────

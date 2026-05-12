@@ -4,6 +4,7 @@ module edu.poli.proyectooodle {
     requires java.sql;
     requires java.dotenv;
     requires jbcrypt;
+    requires java.desktop;
     opens edu.poli.proyectooodle.controlador to javafx.fxml;
     exports edu.poli.proyectooodle.modelo;
     exports edu.poli.proyectooodle.vista;
